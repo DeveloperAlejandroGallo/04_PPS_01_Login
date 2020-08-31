@@ -24,25 +24,59 @@ export class LoginComponent implements OnInit
     let usrObservable = this.login.Get().subscribe((usuarioBD: any) =>
     {
 
-      for(let i = 0; i < usuarioBD.length; i++)
-      {
-        let mail: string;
-        let pass: string;
-        let nYa: string ;
+      // for(let i = 0; i < usuarioBD.length; i++)
+      // {
+      //   let mail: string;
+      //   let pass: string;
+      //   let nYa: string ;
 
-        mail  = usuarioBD[i].payload.doc.data().email;
-        pass  = usuarioBD[i].payload.doc.data().password;
-        nYa = usuarioBD[i].payload.doc.data().nombreYApellido;
+      //   mail  = usuarioBD[i].payload.doc.data().email;
+      //   pass  = usuarioBD[i].payload.doc.data().password;
+      //   nYa = usuarioBD[i].payload.doc.data().nombreYApellido;
         
-        if (this.email == mail && this.password == pass)
+      //   if (this.email == mail && this.password == pass)
+      //   {
+      //     this.mensaje = 'Bienvenido ' + nYa ;
+      //     break;
+      //   }
+      //   else
+      //   {
+      //     this.mensaje = 'Usuario o Password incorrectos';
+      //   }
+      // }
+
+      if (this.email != '')
+      {
+        if (this.password != '')
+        {
+          for (let usuario of usuarioBD)
           {
-            this.mensaje = 'Bienvenido ' + nYa ;
-            break;
+            let email: string;
+            let pass: string;
+            let nombreYApellido: string;
+
+            email = usuario.payload.doc.data().email;
+            pass = usuario.payload.doc.data().password;
+            nombreYApellido = usuario.payload.doc.data().nombreYApellido;
+
+            if (this.email == email && this.password == pass)
+            {
+              this.mensaje = 'Bienvenido ' + nombreYApellido;
+            }
+            else
+            {
+              this.mensaje = 'Usuario o Clave incorrectos';
+            }
           }
-          else
-          {
-            this.mensaje = 'Usuario o Password incorrectos';
-          }
+        }
+        else
+        {
+          this.mensaje = 'Por favor ingrese su clave';
+        }
+      }
+      else
+      {
+        this.mensaje = 'Debe ingresar un email';
       }
       usrObservable.unsubscribe();
     });
