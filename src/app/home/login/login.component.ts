@@ -11,7 +11,7 @@ import { stringify } from 'querystring';
 export class LoginComponent implements OnInit 
 {
   // Declaraciones
-  usuario: string;
+  email: string;
   password: string;
   mensaje: string;
 
@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit
 
       for(let i = 0; i < usuarioBD.length; i++)
       {
-        let usr: string  = usuarioBD[i].payload.doc.data().usuario;
+        let mail: string  = usuarioBD[i].payload.doc.data().email;
         let pass: string  = usuarioBD[i].payload.doc.data().password;
         let nYa: string = usuarioBD[i].payload.doc.data().nombreYApellido;
 
-        if (this.usuario == usr && this.password == pass)
+        if (this.email == mail && this.password == pass)
           {
             this.mensaje = 'Bienvenido ' + nYa ;
             break;
