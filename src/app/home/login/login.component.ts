@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../service/login.service';
-import { stringify } from 'querystring';
 import { AuthenticationService } from '../../service/authentication.service';
 import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit
   validarLoginUsr(): void
   {
     const usrObservable = this.login.GetUsuarios().subscribe((usuarioBD: any) =>
-    {
-      if (this.email)
+    {// tslint:disable-next-line: triple-equals
+      if (this.email != '')
       {
-        if (this.password)
+        if (this.password != '')
         {
-          for (const usuario of usuarioBD) // ForEach
+          for (const usuario of usuarioBD)
           {
             let email: string;
             let pass: string;
@@ -42,20 +42,26 @@ export class LoginComponent implements OnInit
             pass = usuario.payload.doc.data().password;
             nombreYApellido = usuario.payload.doc.data().nombreYApellido;
 
-            // tslint:disable-next-line: triple-equals
+            
             if (this.email == email && this.password == pass)
             {
               this.mensaje = 'Bienvenido ' + nombreYApellido;
             }
             else
-            { this.mensaje = 'Usuario o Clave incorrectos'; }
+            {
+              this.mensaje = 'Usuario o Clave incorrectos';
+            }
           }
         }
         else
-        { this.mensaje = 'Por favor ingrese su clave'; }
+        {
+          this.mensaje = 'Por favor ingrese su clave';
+        }
       }
       else
-      { this.mensaje = 'Debe ingresar un email'; }
+      {
+        this.mensaje = 'Debe ingresar un email';
+      }
       usrObservable.unsubscribe();
     });
 
