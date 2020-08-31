@@ -26,10 +26,14 @@ export class LoginComponent implements OnInit
 
       for(let i = 0; i < usuarioBD.length; i++)
       {
-        let mail: string  = usuarioBD[i].payload.doc.data().email;
-        let pass: string  = usuarioBD[i].payload.doc.data().password;
-        let nYa: string = usuarioBD[i].payload.doc.data().nombreYApellido;
+        let mail: string;
+        let pass: string;
+        let nYa: string ;
 
+        mail  = usuarioBD[i].payload.doc.data().email;
+        pass  = usuarioBD[i].payload.doc.data().password;
+        nYa = usuarioBD[i].payload.doc.data().nombreYApellido;
+        
         if (this.email == mail && this.password == pass)
           {
             this.mensaje = 'Bienvenido ' + nYa ;
