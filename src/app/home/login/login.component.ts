@@ -65,18 +65,9 @@ export class LoginComponent implements OnInit
   {
     this.authServise.initSesion(this.email, this.password).then(resp =>
     {
-      try {
         this.mensaje = 'Bienvenido';
-      
-      }
-      catch (error) {
-        this.mensaje = error.message;
-      }
-      
-
     }).catch(error => {
       this.mensaje = error.message;
     });
   }
-
 }
