@@ -8,7 +8,7 @@ export class LoginService {
 
   constructor(private fireStore: AngularFirestore) { }
   readonly collectionName = 'usuarios';
-  Get()
+  GetUsuarios()
   {
     return this.fireStore.collection(this.collectionName).snapshotChanges();
   }
